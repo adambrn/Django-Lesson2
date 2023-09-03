@@ -1,0 +1,14 @@
+{% extends "base.html" %}
+
+{% block title %}Информация о товаре{% endblock %}
+
+{% block content %}
+<h1>Информация о товаре</h1>
+<p><strong>ID:</strong> {{ product.id }}</p>
+<p><strong>Название:</strong> {{ product.name }}</p>
+<p><strong>Описание:</strong> {{ product.description }}</p>
+<p><strong>Цена:</strong> {{ product.price }}</p>
+<p><strong>Количество:</strong> {{ product.quantity }}</p>
+<p><strong>Дата добавления:</strong> {{ product.added_date }}</p>
+<a href="{% url 'product_list' %}" class="btn btn-secondary">Вернуться к списку товаров</a>
+{% endblock %}
