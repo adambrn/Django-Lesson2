@@ -2,6 +2,26 @@ from django.shortcuts import render, get_object_or_404, redirect
 from .models import Client, Product, Order
 from .forms import ClientForm, ProductForm, OrderForm
 
+def index(request):
+    return render(request, 'index.html',)
+
+# Detail
+def client_detail(request, client_id):
+    client = get_object_or_404(Client, pk=client_id)
+    context = {'client': client}
+    return render(request, 'client_detail.html', context)
+
+def product_detail(request, product_id):
+    product = get_object_or_404(product, pk=product_id)
+    context = {'client': product}
+    return render(request, 'product_detail.html', context)
+    
+def order_detail(request, order_id):
+    order = get_object_or_404(order, pk=order_id)
+    context = {'client': order}
+    return render(request, 'order_detail.html', context)
+
+
 # Create
 def create_client(request):
     if request.method == 'POST':
