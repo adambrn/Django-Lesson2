@@ -1,0 +1,18 @@
+{% extends "base.html" %}
+
+{% block title %}Информация о заказе{% endblock %}
+
+{% block content %}
+<h1>Информация о заказе</h1>
+<p><strong>ID:</strong> {{ order.id }}</p>
+<p><strong>Клиент:</strong> {{ order.client }}</p>
+<p><strong>Товары:</strong></p>
+<ul>
+    {% for product in order.products.all %}
+    <li>{{ product.name }} (Количество: {{ product.quantity }})</li>
+    {% endfor %}
+</ul>
+<p><strong>Общая сумма заказа:</strong> {{ order.total_amount }}</p>
+<p><strong>Дата оформления заказа:</strong> {{ order.order_date }}</p>
+<a href="{% url 'order_list' %}" class="btn btn-secondary">Вернуться к списку заказов</a>
+{% endblock %}

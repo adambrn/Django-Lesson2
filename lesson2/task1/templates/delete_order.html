@@ -1,0 +1,27 @@
+{% extends "base.html" %}
+
+{% block title %}Удалить заказ{% endblock %}
+
+{% block content %}
+<h1>Удалить заказ</h1>
+<p>Вы уверены, что хотите удалить заказ ?</p>
+<br>
+<h1>Информация о заказе</h1>
+<p><strong>ID:</strong> {{ order.id }}</p>
+<p><strong>Клиент:</strong> {{ order.client }}</p>
+<p><strong>Товары:</strong></p>
+<ul>
+    {% for product in order.products.all %}
+    <li>{{ product.name }} (Количество: {{ product.quantity }})</li>
+    {% endfor %}
+</ul>
+<p><strong>Общая сумма заказа:</strong> {{ order.total_amount }}</p>
+<p><strong>Дата оформления заказа:</strong> {{ order.order_date }}</p>
+
+<form method="post">
+    {% csrf_token %}
+    <button type="submit" class="btn btn-danger">Удалить</button>
+</form>
+
+<a href="{% url 'client_list' %}" class="btn btn-secondary">Отмена</a>
+{% endblock %}

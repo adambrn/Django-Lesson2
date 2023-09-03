@@ -58,7 +58,7 @@ urlpatterns = [
     path('order/create/', views.create_order, name='create_order'),
 
     # URL для просмотра заказа
-    path('order/<int:order_id>/', views.order_detail, name='order_details'),
+    path('order/<int:order_id>/', views.order_detail, name='order_detail'),
 
     # URL для просмотра списка заказов
     path('orders/', views.order_list, name='order_list'),
