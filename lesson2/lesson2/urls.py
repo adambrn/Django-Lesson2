@@ -68,4 +68,7 @@ urlpatterns = [
 
     # URL для удаления заказа
     path('order/<int:order_id>/delete/', views.delete_order, name='delete_order'),
+    
+    # URL для всех заказов клиента
+    path('client/<int:client_id>/ordered_products/', views.client_ordered_products, name='client_ordered_products'),
 ]

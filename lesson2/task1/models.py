@@ -32,11 +32,11 @@ class Order(models.Model):
    client = models.ForeignKey(Client, on_delete=models.CASCADE, verbose_name='Клиент')
    products = models.ManyToManyField(Product, verbose_name='Товары в заказе')
    total_amount = models.DecimalField(max_digits=10, decimal_places=2, verbose_name='Общая стоимость заказа')
-   order_date = models.DateTimeField(auto_now_add=True, verbose_name='Дата оформления заказа')
+   order_date = models.DateTimeField( verbose_name='Дата оформления заказа')
 
    class Meta:
        verbose_name = 'Заказ'
        verbose_name_plural = 'Заказы'
 
    def __str__(self):
-       return f"Заказ No{self.pk} от {self.client.name}"
+       return f"Заказ № {self.pk} от {self.client.name}"

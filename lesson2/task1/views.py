@@ -1,3 +1,4 @@
+import datetime
 from django.shortcuts import render, get_object_or_404, redirect
 from .models import Client, Product, Order
 from .forms import ClientForm, ProductForm, OrderForm
@@ -12,13 +13,13 @@ def client_detail(request, client_id):
     return render(request, 'client_detail.html', context)
 
 def product_detail(request, product_id):
-    product = get_object_or_404(product, pk=product_id)
-    context = {'client': product}
+    product = get_object_or_404(Product, pk=product_id)
+    context = {'product': product}
     return render(request, 'product_detail.html', context)
     
 def order_detail(request, order_id):
-    order = get_object_or_404(order, pk=order_id)
-    context = {'client': order}
+    order = get_object_or_404(Order, pk=order_id)
+    context = {'order': order}
     return render(request, 'order_detail.html', context)
 
 
@@ -122,3 +123,25 @@ def delete_order(request, order_id):
         return redirect('order_list')
     return render(request, 'delete_order.html', {'order': order})
 
+def client_ordered_products(request, client_id, period=None):
+    client = get_object_or_404(Client, id=client_id)
+
+    # Определяем дату начала и конца периода в зависимости от параметра
+    today = datetime.datetime.now()
+    period = request.GET.get('period')
+    if period:
+        start_date = today - datetime.timedelta(days=int(period))
+    else:
+        start_date = None
+    print(start_date)
+    if start_date:
+        orders = Order.objects.filter(client=client, order_date__gte=start_date)
+    else:
+        orders = Order.objects.filter(client=client)
+
+    context = {
+        'client': client,
+        'orders': orders,
+    }
+
+    return render(request, 'client_ordered_products.html', context)
