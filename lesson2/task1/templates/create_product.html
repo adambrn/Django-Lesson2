@@ -3,11 +3,13 @@
 {% block title %}Создать товар{% endblock %}
 
 {% block content %}
+<a href="{% url 'product_list' %}" class="btn btn-secondary">Вернуться к списку товаров</a>
 <h1>Создать новый товар</h1>
-<form method="post">
+<form method="post" enctype="multipart/form-data">
     {% csrf_token %}
     {{ form.as_p }}
     <button type="submit" class="btn btn-primary">Создать</button>
-</form>
-<a href="{% url 'product_list' %}" class="btn btn-secondary">Вернуться к списку товаров</a>
+    <a href="{% url 'product_list' %}" class="btn btn-secondary">Отмена</a>
 {% endblock %}
+</form>
+
